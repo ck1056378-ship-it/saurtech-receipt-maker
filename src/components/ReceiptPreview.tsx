@@ -31,19 +31,22 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
           <div className="receipt-company-info">
             <h1 className="company-name">A.R. Saurtech Energy Pvt. Ltd.</h1>
             <p>A-21, Sector-67, Noida, Uttar Pradesh, India</p>
-            <p>Phone: +91-9917979979 | +91-9045052587</p>
-            <p>Email: hello@arsaurtech.com | solarsaurtechinfo@gmail.com</p>
-            <p>Web: arsaurtechenergy.com</p>
+            <p>+91-9917979979 | +91-9045052587</p>
+            <p>hello@arsaurtech.com | solarsaurtechinfo@gmail.com</p>
+            <p>www.arsaurtechenergy.com</p>
           </div>
         </div>
+
+        <div className="receipt-header-line"></div>
 
         <div className="receipt-title-bar">
           <h2>Receipt Voucher</h2>
         </div>
+        <div className="receipt-title-underline"></div>
 
         {/* Top info */}
         <div className="receipt-info-row">
-          <div><strong>Receipt No.:</strong> {data?.receiptNo || '—'}</div>
+          <div><strong>Receipt No:</strong> {data?.receiptNo || '—'}</div>
           <div><strong>Date:</strong> {data?.date || '—'}</div>
         </div>
 
@@ -52,7 +55,7 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
           <thead>
             <tr>
               <th className="col-particulars">Particulars</th>
-              <th className="col-amount">Amount (₹)</th>
+              <th className="col-amount">Amount</th>
             </tr>
           </thead>
           <tbody>
@@ -61,20 +64,20 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
                 {data ? (
                   <>
                     <div className="particular-item">
-                      <span className="particular-label">Account:</span>
-                      <span>{data.customerName}</span>
+                      <div className="particular-label">Account:</div>
+                      <div className="particular-value">{data.customerName}</div>
                     </div>
                     <div className="particular-item">
-                      <span className="particular-label">Through:</span>
-                      <span>{data.through}</span>
+                      <div className="particular-label">Through:</div>
+                      <div className="particular-value">{data.through}</div>
                     </div>
                     <div className="particular-item">
-                      <span className="particular-label">On Account of:</span>
-                      <span>{data.onAccountOf}</span>
+                      <div className="particular-label">On Account of:</div>
+                      <div className="particular-value">{data.onAccountOf}</div>
                     </div>
                     <div className="particular-item">
-                      <span className="particular-label">Amount (in words):</span>
-                      <span className="amount-words">{amountToWords(amt)}</span>
+                      <div className="particular-label">Amount (in words):</div>
+                      <div className="particular-value amount-words">{amountToWords(amt)}</div>
                     </div>
                   </>
                 ) : (
@@ -82,14 +85,14 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
                 )}
               </td>
               <td className="amount-cell">
-                {data ? formatIndianCurrency(amt) : '—'}
+                {data ? '₹ ' + formatIndianCurrency(amt).replace('₹ ', '') : '—'}
               </td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
               <td className="total-label"><strong>Total</strong></td>
-              <td className="total-amount"><strong>{data ? formatIndianCurrency(amt) : '—'}</strong></td>
+              <td className="total-amount"><strong>{data ? '₹ ' + formatIndianCurrency(amt).replace('₹ ', '') : '—'}</strong></td>
             </tr>
           </tfoot>
         </table>
@@ -101,7 +104,7 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
           </div>
           <div className="signature-area">
             <div className="signature-line"></div>
-            <p>Authorised Signatory</p>
+            <p className="signatory-title">Authorised Signatory</p>
             <p className="signatory-company">A.R. Saurtech Energy Pvt. Ltd.</p>
           </div>
         </div>
