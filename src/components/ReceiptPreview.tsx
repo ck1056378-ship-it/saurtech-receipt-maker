@@ -34,7 +34,7 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
             <p>A-21, Sector-67, Noida, Uttar Pradesh, India</p>
             <p>+91-9917979979 | +91-9045052587</p>
             <p>hello@arsaurtech.com | solarsaurtechinfo@gmail.com</p>
-            <p>www.arsaurtechenergy.com</p>
+            <p><a href="https://arsaurtechenergy.com/" target="_blank" rel="noopener noreferrer" className="company-website-link">www.arsaurtechenergy.com</a></p>
           </div>
         </div>
 
