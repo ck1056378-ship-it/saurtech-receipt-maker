@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import companyLogo from '@/assets/company_logo.png';
 import stampImg from '@/assets/stamp.png';
+import signatureImg from '@/assets/signature.png';
 import { amountToWords, formatIndianCurrency } from '@/lib/amountToWords';
 
 export interface ReceiptData {
@@ -33,7 +34,7 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
             <p>A-21, Sector-67, Noida, Uttar Pradesh, India</p>
             <p>+91-9917979979 | +91-9045052587</p>
             <p>hello@arsaurtech.com | solarsaurtechinfo@gmail.com</p>
-            <p>www.arsaurtechenergy.com</p>
+            <p><a href="https://arsaurtechenergy.com/" target="_blank" rel="noopener noreferrer" className="company-website-link">www.arsaurtechenergy.com</a></p>
           </div>
         </div>
 
@@ -103,6 +104,7 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
             {data && <img src={stampImg} alt="Company Stamp" className="stamp-img" />}
           </div>
           <div className="signature-area">
+            {data && <img src={signatureImg} alt="Signature" className="signature-img" />}
             <div className="signature-line"></div>
             <p className="signatory-title">Authorised Signatory</p>
             <p className="signatory-company">A.R. Saurtech Energy Pvt. Ltd.</p>

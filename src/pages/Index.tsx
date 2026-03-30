@@ -76,6 +76,8 @@ export default function Index() {
     const pdfW = pdf.internal.pageSize.getWidth() - 20;
     const pdfH = (canvas.height * pdfW) / canvas.width;
     pdf.addImage(imgData, 'PNG', 10, 10, pdfW, pdfH);
+    // Add clickable link over the entire receipt area pointing to the website
+    pdf.link(10, 10, pdfW, pdfH, { url: 'https://arsaurtechenergy.com/' });
     pdf.save(`receipt-${receiptData.receiptNo}-${receiptData.customerName.replace(/\s+/g, '_')}.pdf`);
   };
 
