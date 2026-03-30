@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import companyLogo from '@/assets/company_logo.png';
 import stampImg from '@/assets/stamp.png';
+import signatureImg from '@/assets/signature.png';
 import { amountToWords, formatIndianCurrency } from '@/lib/amountToWords';
 
 export interface ReceiptData {
