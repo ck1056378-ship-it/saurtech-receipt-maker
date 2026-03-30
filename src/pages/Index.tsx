@@ -1,11 +1,13 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import ReceiptForm from '@/components/ReceiptForm';
 import ReceiptPreview, { type ReceiptData } from '@/components/ReceiptPreview';
+import ReceiptHistory from '@/components/ReceiptHistory';
 import '@/styles/receipt.css';
 
 const COUNTER_KEY = 'ar_saurtech_receipt_counter';
+const HISTORY_KEY = 'ar_saurtech_receipt_history';
 
 function getCounter(): number {
   const stored = localStorage.getItem(COUNTER_KEY);
@@ -18,15 +20,30 @@ function incrementCounter(): number {
   return next;
 }
 
+function getHistory(): ReceiptData[] {
+  try {
+    const stored = localStorage.getItem(HISTORY_KEY);
+    return stored ? JSON.parse(stored) : [];
+  } catch { return []; }
+}
+
+function saveHistory(history: ReceiptData[]) {
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+}
+
 export default function Index() {
   const [receiptData, setReceiptData] = useState<ReceiptData | null>(null);
   const [nextNo, setNextNo] = useState(getCounter);
+  const [history, setHistory] = useState<ReceiptData[]>(getHistory);
   const receiptRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => { saveHistory(history); }, [history]);
 
   const handleGenerate = useCallback((data: ReceiptData & { receiptNo: string }) => {
     const usedNo = data.receiptNo || String(nextNo);
-    setReceiptData({ ...data, receiptNo: usedNo });
-    // If auto number was used, increment
+    const receipt = { ...data, receiptNo: usedNo };
+    setReceiptData(receipt);
+    setHistory(prev => [receipt, ...prev]);
     if (!data.receiptNo || data.receiptNo === String(nextNo)) {
       const newNext = incrementCounter();
       setNextNo(newNext);
@@ -38,6 +55,12 @@ export default function Index() {
   const handleResetCounter = () => {
     localStorage.setItem(COUNTER_KEY, '1');
     setNextNo(1);
+  };
+
+  const handleViewHistory = (data: ReceiptData) => setReceiptData(data);
+
+  const handleDeleteHistory = (index: number) => {
+    setHistory(prev => prev.filter((_, i) => i !== index));
   };
 
   const captureReceipt = async () => {
@@ -90,6 +113,12 @@ export default function Index() {
               <button className="btn btn-print" onClick={handlePrint}>🖨️ Print</button>
             </div>
           )}
+
+          <ReceiptHistory
+            history={history}
+            onView={handleViewHistory}
+            onDelete={handleDeleteHistory}
+          />
         </div>
 
         <div className="preview-section">
