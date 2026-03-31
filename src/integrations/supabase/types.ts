@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      receipt_counter: {
+        Row: {
+          counter: number
+          id: number
+        }
+        Insert: {
+          counter?: number
+          id?: number
+        }
+        Update: {
+          counter?: number
+          id?: number
+        }
+        Relationships: []
+      }
+      receipts: {
+        Row: {
+          amount: string
+          created_at: string
+          customer_name: string
+          date: string
+          id: string
+          on_account_of: string
+          receipt_no: string
+          through: string
+        }
+        Insert: {
+          amount: string
+          created_at?: string
+          customer_name: string
+          date: string
+          id?: string
+          on_account_of: string
+          receipt_no: string
+          through: string
+        }
+        Update: {
+          amount?: string
+          created_at?: string
+          customer_name?: string
+          date?: string
+          id?: string
+          on_account_of?: string
+          receipt_no?: string
+          through?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
