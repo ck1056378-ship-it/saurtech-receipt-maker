@@ -98,13 +98,16 @@ const ReceiptPreview = forwardRef<HTMLDivElement, Props>(({ data }, ref) => {
           </tfoot>
         </table>
 
-        {/* Footer */}
+        {/* Footer — Signature & Stamp */}
         <div className="receipt-footer">
-          <div className="stamp-area">
-            {data && <img src={stampImg} alt="Company Stamp" className="stamp-img" />}
-          </div>
-          <div className="signature-area">
-            {data && <img src={signatureImg} alt="Signature" className="signature-img" />}
+          <div className="footer-spacer"></div>
+          <div className="signatory-block">
+            {data && (
+              <div className="stamp-signature-overlay">
+                <img src={stampImg} alt="Company Stamp" className="stamp-img" />
+                <img src={signatureImg} alt="Signature" className="signature-img" />
+              </div>
+            )}
             <div className="signature-line"></div>
             <p className="signatory-title">Authorised Signatory</p>
             <p className="signatory-company">A.R. Saurtech Energy Pvt. Ltd.</p>
