@@ -262,26 +262,27 @@
 }
 .stamp-signature-overlay {
   position: absolute;
-  bottom: 45px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 200px;
-  height: 120px;
+  width: 240px;
+  height: 130px;
 }
 .stamp-img {
   position: absolute;
-  width: 90px; height: auto;
+  width: 95px; height: auto;
   opacity: 0.7;
   transform: rotate(-8deg);
-  left: -10px;
+  left: -30px;
   bottom: 0;
   z-index: 1;
 }
 .signature-img {
   position: absolute;
-  width: 140px; height: auto;
-  right: -5px;
-  bottom: 10px;
+  width: 150px; height: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 5px;
   z-index: 2;
 }
 .signature-line { width: 200px; border-bottom: 1px solid #333; margin: 0 auto 0.4rem; }
